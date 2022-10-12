@@ -54,7 +54,7 @@ function plus(x1) {
 }
 
 function del(x1) {
-    var y;
+    var y1;
     carts.forEach(element => {
         if (element.quantity > 1 && element.id == x1) {
             element.quantity = parseInt(element.quantity) - 1;
@@ -63,8 +63,8 @@ function del(x1) {
             confirm("are you sure you want to delete");
             if(element.id == x1)
             {
-              y=element;
-              var z=carts.indexOf(y);
+              y1=element;
+              var z=carts.indexOf(y1);
             carts.splice(z, 1);
             }
         }
