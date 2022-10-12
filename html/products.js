@@ -51,18 +51,24 @@ function add(x1) {
 
 $(document).on('click', '.plus', function () {
     products.forEach(element => {
+        
         element.quantity = parseInt(element.quantity) + 1;
         console.log(element.quantity);
         $("#one1").html("<td>" + element.quantity + "</td>");
+       
     });
+
 });
 
 $(document).on('click', '.del', function () {
 
     products.forEach(element => {
         element.quantity = parseInt(element.quantity) - 1;
-        if (element.quantity <= 0) {
+   
+        if (element.quantity <= 0) {   
+           
             $(this).closest("tr").remove();
+        
         }
         console.log(element.quantity);
         $("#one1").html("<td>" + element.quantity + "</td>");
@@ -71,11 +77,23 @@ $(document).on('click', '.del', function () {
 
 });
 $(document).on('click', '.delete', function () {
+    confirm("Are you sure you want to delete");
     m1 = $(this).val();
     products.splice(m1, 1);
     $(this).closest("tr").remove();
 
 });
+
+function display()
+{
+    var str4 = '';
+    cart.forEach(element => {
+        str4 += "<tr><td>" + element.id + "</td><td>" + element.name + "</td><td>" + "<img src=images/" + element.image + "></td><td>" + element.price + "</td><td><td><button type='button'   class='del' >-</button></td><td id='one1'>" + element.quantity + "</td></td><td><button type='button' class='plus'>+</button></td><td><button type='button' style='background:black;padding:10px;color:#fff;border:none;' class='delete' value='" + element + "' id=" + element + ">delete</button></tr>";
+    });
+    $("#table5").html(str4);
+}
+
+
 
 
 
