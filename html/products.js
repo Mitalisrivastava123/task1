@@ -41,12 +41,7 @@ function add(x1) {
         })
     }
     display();
-    // carts.forEach(element => {
-  
-    //     str1 += "<tr><td>" + element.id + "</td><td>" + element.name + "</td><td>" + "<img src=images/" + element.image + "></td><td>" + element.price + "</td><td><td><button type='button'   class='del' >-</button></td><td id='one1'>" + element.quantity + "</td></td><td><button type='button' class='plus'>+</button></td><td><button type='button' style='background:black;padding:10px;color:#fff;border:none;' class='delete' value='" + element + "' id=" + element + ">delete</button></tr>";
-    // });
-    // str1 += "";
-    // $("#table2").html(str1);
+   
 }
 
 
@@ -65,20 +60,22 @@ function  plus(x1)
 
 }
 
-$(document).on('click', '.del', function () {
-
+function del(x1)
+{
     carts.forEach(element => {
-        element.quantity = parseInt(element.quantity) - 1;
-        if (element.quantity <= 0) {     
-            $(this).closest("tr").remove();
-        
+          if (element.quantity > 1 && element.id == x1) {     
+            element.quantity = parseInt(element.quantity) - 1;
         }
-        console.log(element.quantity);
-        $("#one1").html("<td>" + element.quantity + "</td>");
+        else if(element.quantity <= 1)
+        {
+            confirm("are you sure you want to delete");
+        carts.splice(this, 1);
+        }
     });
+    display(carts);
+}
 
 
-});
 $(document).on('click', '.delete', function () {
     m1 = $(this).val();
     products.splice(m1, 1);
@@ -90,7 +87,7 @@ function display()
 {
     var str5 ="";
     carts.forEach(element => {
-        str5 += "<tr><td>" + element.id + "</td><td>" + element.name + "</td><td>" + "<img src=images/" + element.image + "></td><td>" + element.price + "</td><td><td><button type='button'   class='del' >-</button></td><td>" + element.quantity + "</td></td><td><button type='button' onclick='plus(id)' id="+element.id+">+</button></td><td><button type='button' style='background:black;padding:10px;color:#fff;border:none;' class='delete' value='" + element + "' id=" + element + ">delete</button></tr>";   
+        str5 += "<tr><td>" + element.id + "</td><td>" + element.name + "</td><td>" + "<img src=images/" + element.image + "></td><td>" + element.price + "</td><td><td><button type='button'   onclick='del(id)' id="+element.id+" >-</button></td><td>" + element.quantity + "</td></td><td><button type='button' onclick='plus(id)' id="+element.id+">+</button></td><td><button type='button' style='background:black;padding:10px;color:#fff;border:none;' class='delete' value='" + element + "' id=" + element + ">delete</button></tr>";   
     });
     $("#table2").html(str5);
 }
