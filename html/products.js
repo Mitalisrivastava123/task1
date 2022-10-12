@@ -40,33 +40,36 @@ function add(x1) {
             }
         })
     }
-    carts.forEach(element => {
+    display();
+    // carts.forEach(element => {
   
-        str1 += "<tr><td>" + element.id + "</td><td>" + element.name + "</td><td>" + "<img src=images/" + element.image + "></td><td>" + element.price + "</td><td><td><button type='button'   class='del' >-</button></td><td id='one1'>" + element.quantity + "</td></td><td><button type='button' class='plus'>+</button></td><td><button type='button' style='background:black;padding:10px;color:#fff;border:none;' class='delete' value='" + element + "' id=" + element + ">delete</button></tr>";
-    });
-    str1 += "";
-    $("#table2").html(str1);
+    //     str1 += "<tr><td>" + element.id + "</td><td>" + element.name + "</td><td>" + "<img src=images/" + element.image + "></td><td>" + element.price + "</td><td><td><button type='button'   class='del' >-</button></td><td id='one1'>" + element.quantity + "</td></td><td><button type='button' class='plus'>+</button></td><td><button type='button' style='background:black;padding:10px;color:#fff;border:none;' class='delete' value='" + element + "' id=" + element + ">delete</button></tr>";
+    // });
+    // str1 += "";
+    // $("#table2").html(str1);
 }
 
 
-$(document).on('click', '.plus', function () {
-    products.forEach(element => {
-        
+function  plus(x1)
+{
+    carts.forEach(element => {
+        if(element.id ==x1 )
+        {
         element.quantity = parseInt(element.quantity) + 1;
         console.log(element.quantity);
-        $("#one1").html("<td>" + element.quantity + "</td>");
-       
+        }
+        display(carts);
+
+        // $("#one1").html("<td>" + element.quantity + "</td>");
     });
 
-});
+}
 
 $(document).on('click', '.del', function () {
 
-    products.forEach(element => {
+    carts.forEach(element => {
         element.quantity = parseInt(element.quantity) - 1;
-   
-        if (element.quantity <= 0) {   
-           
+        if (element.quantity <= 0) {     
             $(this).closest("tr").remove();
         
         }
@@ -77,7 +80,6 @@ $(document).on('click', '.del', function () {
 
 });
 $(document).on('click', '.delete', function () {
-    confirm("Are you sure you want to delete");
     m1 = $(this).val();
     products.splice(m1, 1);
     $(this).closest("tr").remove();
@@ -86,14 +88,12 @@ $(document).on('click', '.delete', function () {
 
 function display()
 {
-    var str4 = '';
-    cart.forEach(element => {
-        str4 += "<tr><td>" + element.id + "</td><td>" + element.name + "</td><td>" + "<img src=images/" + element.image + "></td><td>" + element.price + "</td><td><td><button type='button'   class='del' >-</button></td><td id='one1'>" + element.quantity + "</td></td><td><button type='button' class='plus'>+</button></td><td><button type='button' style='background:black;padding:10px;color:#fff;border:none;' class='delete' value='" + element + "' id=" + element + ">delete</button></tr>";
+    var str5 ="";
+    carts.forEach(element => {
+        str5 += "<tr><td>" + element.id + "</td><td>" + element.name + "</td><td>" + "<img src=images/" + element.image + "></td><td>" + element.price + "</td><td><td><button type='button'   class='del' >-</button></td><td>" + element.quantity + "</td></td><td><button type='button' onclick='plus(id)' id="+element.id+">+</button></td><td><button type='button' style='background:black;padding:10px;color:#fff;border:none;' class='delete' value='" + element + "' id=" + element + ">delete</button></tr>";   
     });
-    $("#table5").html(str4);
+    $("#table2").html(str5);
 }
-
-
 
 
 
