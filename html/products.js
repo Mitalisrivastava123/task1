@@ -5,7 +5,6 @@ var products = [{ "id": 101, "name": "Basket Ball", "image": "basketball.png", "
 { "id": 105, "name": "Tennis", "image": "tennis.png", "price": 100, index: 4, quantity: 1 }];
 
 
-
 $(document).on('click', '.display', function () {
     var string1 = "<table><tr><th>Id</th><th>Name</th><th>Image</th><th>Price</th><th></th></tr>";
     for (let x = 0; x < products.length; x++) {
@@ -19,57 +18,55 @@ $(document).on('click', '.display', function () {
 let carts = [];
 function add(x1) {
     var str1 = "";
-    let flag =0;
-    for(let i=0;i<carts.length;i++){
-        if(carts[i].id==x1){
-            flag=1;
+    let flag = 0;
+    for (let i = 0; i < carts.length; i++) {
+        if (carts[i].id == x1) {
+            flag = 1;
         }
     }
-    if(flag==0){
+    if (flag == 0) {
         products.forEach(element => {
             if (element.id == x1) {
                 var obj = { id: element.id, name: element.name, image: element.image, price: element.price, quantity: 1 };
                 carts.push(obj);
             }
-            
+
         });
-    }else if(flag==1){
-        carts.forEach(e=>{
-            if(e.id==id){
+    } else if (flag == 1) {
+        carts.forEach(e => {
+            if (e.id == id) {
                 e.quantity++;
             }
         })
     }
     display();
-   
 }
 
 
-function  plus(x1)
-{
+function plus(x1) {
     carts.forEach(element => {
-        if(element.id ==x1 )
-        {
-        element.quantity = parseInt(element.quantity) + 1;
-        console.log(element.quantity);
+        if (element.id == x1) {
+            element.quantity = parseInt(element.quantity) + 1;
+            console.log(element.quantity);
         }
         display(carts);
-
-        // $("#one1").html("<td>" + element.quantity + "</td>");
     });
-
 }
 
-function del(x1)
-{
+function del(x1) {
+    var y;
     carts.forEach(element => {
-          if (element.quantity > 1 && element.id == x1) {     
+        if (element.quantity > 1 && element.id == x1) {
             element.quantity = parseInt(element.quantity) - 1;
         }
-        else if(element.quantity <= 1)
-        {
+        else if (element.quantity <= 1 && element.id == x1) {
             confirm("are you sure you want to delete");
-        carts.splice(this, 1);
+            if(element.id == x1)
+            {
+              y=element;
+              var z=carts.indexOf(y);
+            carts.splice(z, 1);
+            }
         }
     });
     display(carts);
@@ -77,7 +74,7 @@ function del(x1)
 
 
 $(document).on('click', '.delete', function () {
-  
+
     m1 = $(this).val();
     confirm("are you sure you want to delete");
     products.splice(m1, 1);
@@ -85,19 +82,16 @@ $(document).on('click', '.delete', function () {
 
 });
 
-function display()
-{
-    var str5 ="";
+function display() {
+    var str5 = "";
     carts.forEach(element => {
-        str5 += "<tr><td>" + element.id + "</td><td>" + element.name + "</td><td>" + "<img src=images/" + element.image + "></td><td>" + element.price + "</td><td><td><button type='button'   onclick='del(id)' id="+element.id+" >-</button></td><td>" + element.quantity + "</td></td><td><button type='button' onclick='plus(id)' id="+element.id+">+</button></td><td><button type='button' style='background:black;padding:10px;color:#fff;border:none;' class='delete' value='" + element + "' id=" + element + ">delete</button></tr>";   
+        str5 += "<tr><td>" + element.id + "</td><td>" + element.name + "</td><td>" + "<img src=images/" + element.image + "></td><td>" + element.price + "</td><td><td><button type='button'   onclick='del(id)' id=" + element.id + " >-</button></td><td>" + element.quantity + "</td></td><td><button type='button' onclick='plus(id)' id=" + element.id + ">+</button></td><td><button type='button' style='background:black;padding:10px;color:#fff;border:none;' class='delete' value='" + element + "' id=" + element + ">delete</button></tr>";
     });
     $("#table2").html(str5);
 }
-
-
-$(document).on('click', '#cartempty' , function(){
-carts = [];
-display();
+$(document).on('click', '#cartempty', function () {
+    carts = [];
+    display();
 });
 
 
