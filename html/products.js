@@ -93,6 +93,11 @@ function display()
 }
 
 
+$(document).on('click', '#cartempty' , function(){
+carts = [];
+display();
+});
+
 
 
 
