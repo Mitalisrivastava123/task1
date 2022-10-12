@@ -77,7 +77,9 @@ function del(x1)
 
 
 $(document).on('click', '.delete', function () {
+  
     m1 = $(this).val();
+    confirm("are you sure you want to delete");
     products.splice(m1, 1);
     $(this).closest("tr").remove();
 
