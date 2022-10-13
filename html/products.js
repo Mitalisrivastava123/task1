@@ -17,7 +17,7 @@ $(document).on('click', '.display', function () {
 
 let carts = [];
 function add(x1) {
-    var str1 = "";
+   
     let flag = 0;
     for (let i = 0; i < carts.length; i++) {
         if (carts[i].id == x1) {
@@ -32,9 +32,9 @@ function add(x1) {
             }
 
         });
-    } else if (flag == 1) {
+    } else {
         carts.forEach(e => {
-            if (e.id == id) {
+            if (e.id == x1) {
                 e.quantity++;
             }
         })
@@ -77,7 +77,7 @@ $(document).on('click', '.delete', function () {
 
     m1 = $(this).val();
     confirm("are you sure you want to delete");
-    products.splice(m1, 1);
+    carts.splice(m1, 1);
     $(this).closest("tr").remove();
 
 });
